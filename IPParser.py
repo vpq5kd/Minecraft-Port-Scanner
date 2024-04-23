@@ -32,23 +32,26 @@ class IPFileParse:
 
     """method to be called after parse(), translates the ranges into a list of ips
     based on the amount of rows the user wants. Currently this is a VERY inefficient way of finding
-    potential 'targets'. future updates will allow more narrow searching for a more efficient system."""
-    def get_ip(self,number_of_rows):
+    potential 'targets'. future updates will allow more narrow searching for a more efficient system.
+    Users may either add a select number of rows or type 'all' to get every ip."""
+    def get_ips(self,number_of_rows):
         ip_array = []
         with open(self.outFilePath, 'r') as file:
             reader = csv.reader(file)
             for i, row in enumerate(reader):
-                if i >= number_of_rows:
-                    break
+                if number_of_rows != "all":
+                    if i >= number_of_rows:
+                        break
                 for j in range(int(row[0]), int(row[1])+1):
                     ip_address = socket.inet_ntoa(bytes.fromhex('{:08x}'.format(j)))
                     ip_array.append(ip_address)
+                    # print(ip_address)
         return ip_array
 
 def main():
     parser = IPFileParse()
     parser.parse("US")
-    print(parser.get_ip(1))
+    print(parser.get_ips())
 main()
 
 

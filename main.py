@@ -21,6 +21,9 @@ def main():
     parser = IPParser.IPFileParse()
     parser.parse("US")
 
+    #gets a list of ips to test
+    parser.get_ips(1)
+
 
 
 
