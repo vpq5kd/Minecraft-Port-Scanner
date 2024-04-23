@@ -40,18 +40,18 @@ class IPFileParse:
             reader = csv.reader(file)
             for i, row in enumerate(reader):
                 if number_of_rows != "all":
-                    if i >= number_of_rows:
-                        break
+                    if i != number_of_rows:
+                        continue
                 for j in range(int(row[0]), int(row[1])+1):
                     ip_address = socket.inet_ntoa(bytes.fromhex('{:08x}'.format(j)))
                     ip_array.append(ip_address)
                     # print(ip_address)
         return ip_array
 
-def main():
-    parser = IPFileParse()
-    parser.parse("US")
-    print(parser.get_ips())
-main()
+# def main():
+#     parser = IPFileParse()
+#     parser.parse("US")
+#     print(parser.get_ips())
+# main()
 
 
