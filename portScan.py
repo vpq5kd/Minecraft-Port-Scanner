@@ -6,6 +6,8 @@ class portScan:
     def __init__(self,ip_addresses):
         self.ip_addresses = ip_addresses
         self.port = 25565
+        self.hasport_array = []
+        self.nothasport_array = []
 
     """method to scan each ip address for an open minecraft port: 25565 """
     def scan(self):
@@ -35,11 +37,15 @@ class portScan:
     def thread_scan(self):
         threads = []
         for ip_address in self.ip_addresses:
-            t = threading.Thread(target=self._thread_scan_logic, args=(ip_address))
+            t = threading.Thread(target=self._thread_scan_logic, args=(ip_address,))
             threads.append(t)
             t.start()
         for t in threads:
             t.join()
+        for each in self.nothasport_array:
+            print(each)
+        for each in self.hasport_array:
+            print(each)
 
     """copy of the scan() method but instead it only takes on ip address as an argument"""
     def _thread_scan_logic(self, ip_address):
@@ -48,11 +54,13 @@ class portScan:
             socket.setdefaulttimeout(1)
 
             result = s.connect_ex((ip_address,self.port))
-            print(f'scanning {ip_address}')
+            #print(f'scanning {ip_address}')
             if result == 0:
-                print(f'{ip_address} has an open minecraft port')
+                self.hasport_array.append(f'{ip_address} has an open minecraft port')
+                #print(f'{ip_address} has an open minecraft port')
             else:
-                print(f"{ip_address} doesn't have an open minecraft port")
+                self.nothasport_array.append(f"{ip_address} doesn't have an open minecraft port")
+                #print(f"{ip_address} doesn't have an open minecraft port")
         except KeyboardInterrupt:
             print("Program ended")
             sys.exit()

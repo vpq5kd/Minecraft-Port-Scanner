@@ -23,12 +23,12 @@ def main():
     parser.parse("US")
 
     #gets a list of ips to test
-    ip_addresses = parser.get_ips("all")
+    ip_addresses = parser.get_ips(1)
     #ip_addresses = ["play.neocubest.com","play.vulengate.com","google.com"] #two known and one unknown to demonstrate functionality
 
     #prints ip addresses with open minecraft ports
     ip_scan = portScan.portScan(ip_addresses)
-    ip_scan.scan()
+    ip_scan.thread_scan()
 
 
 
