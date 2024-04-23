@@ -14,9 +14,11 @@ class portScan:
                 socket.setdefaulttimeout(1)
 
                 result = s.connect_ex((ip_address,self.port))
-                print(f'{ip_address}')
+                print(f'scanning {ip_address}')
                 if result == 0:
                     print(f'{ip_address} has an open minecraft port')
+                else:
+                    print(f"{ip_address} doesn't have an open minecraft port")
         except KeyboardInterrupt:
             print("Program ended")
             sys.exit()
