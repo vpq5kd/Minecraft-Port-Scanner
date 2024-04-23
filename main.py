@@ -2,6 +2,7 @@ import sys
 import socket
 import pyfiglet
 import IPParser
+import portScan
 
 #resources:
 """Port-scan basics: https://www.geeksforgeeks.org/port-scanner-using-python/ """
@@ -22,7 +23,12 @@ def main():
     parser.parse("US")
 
     #gets a list of ips to test
-    parser.get_ips(1)
+    ip_addresses = parser.get_ips(1)
+
+    #prints ip addresses with open minecraft ports
+    ip_scan = portScan.portScan(ip_addresses)
+    ip_scan.scan()
+
 
 
 
