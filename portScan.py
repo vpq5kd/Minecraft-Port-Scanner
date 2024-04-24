@@ -52,6 +52,17 @@ class portScan:
     """Method similar to thread-scan desgined for multi-threading. I.E., running multiple threads which are each running thread_scan
     on a different object. """
     def multi_thread_scan(self):
+        threads = []
+        for ip_address in self.ip_addresses:
+            t = threading.Thread(target=self._thread_scan_logic, args=(ip_address,))
+            threads.append(t)
+            t.start()
+        for t in threads:
+            t.join()
+        # for each in self.nothasport_array:
+        #     print(each)
+        for each in self.hasport_array:
+            print(each)
 
     """copy of the scan() method but instead it only takes on ip address as an argument"""
     def _thread_scan_logic(self, ip_address):
