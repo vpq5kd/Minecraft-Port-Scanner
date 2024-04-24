@@ -16,7 +16,7 @@ import portScan
 
 #main:
 def main():
-    #prints banner
+    #prints banner (idea from geeks for geeks)
     banner = pyfiglet.figlet_format("Minecraft Port Scanner")
     print(banner)
     print("-" * 50)
@@ -32,23 +32,23 @@ def main():
     #ip_addresses = ["play.neocubest.com","play.vulengate.com","google.com"] #two known and one unknown to demonstrate functionality
 
     #prints ip addresses with open minecraft ports
-    ip_scan = portScan.portScan(ip_addresses)
-    ip_scan.thread_scan()
+    # ip_scan = portScan.portScan(ip_addresses)
+    # ip_scan.thread_scan()
 
     """ attempt at multi-threading to further increase efficiency (STILL WORKING): """
 
-    # ip_scan_0 = portScan.portScan(ip_addresses)
-    # ip_scan_1 = portScan.portScan(ip_addresses_1)
-    # ip_scan_2 = portScan.portScan(ip_addresses_2)
-    #
-    # ip_scans = [ip_scan_0, ip_scan_1, ip_scan_2]
-    # threads = []
-    # for ip_scan in ip_scans:
-    #     t = threading.Thread(target=ip_scan.thread_scan())
-    #     threads.append(t)
-    #     t.start()
-    # for t in threads:
-    #     t.join()
+    ip_scan_0 = portScan.portScan(ip_addresses)
+    ip_scan_1 = portScan.portScan(ip_addresses_1)
+    ip_scan_2 = portScan.portScan(ip_addresses_2)
+
+    ip_scans = [ip_scan_0, ip_scan_1, ip_scan_2]
+    threads = []
+    for ip_scan in ip_scans:
+        t = threading.Thread(target=ip_scan.thread_scan())
+        threads.append(t)
+        t.start()
+    for t in threads:
+        t.join()
 
 
 

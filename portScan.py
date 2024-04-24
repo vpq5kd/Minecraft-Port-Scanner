@@ -49,6 +49,9 @@ class portScan:
             print(each)
         for each in self.hasport_array:
             print(each)
+    """Method similar to thread-scan desgined for multi-threading. I.E., running multiple threads which are each running thread_scan
+    on a different object. """
+    def multi_thread_scan(self):
 
     """copy of the scan() method but instead it only takes on ip address as an argument"""
     def _thread_scan_logic(self, ip_address):
