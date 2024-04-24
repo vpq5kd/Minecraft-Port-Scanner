@@ -17,13 +17,14 @@ def main():
     #prints banner
     banner = pyfiglet.figlet_format("Minecraft Port Scanner")
     print(banner)
+    print("-" * 50)
 
     #parses data for us countries
     parser = IPParser.IPFileParse()
     parser.parse("US")
 
     #gets a list of ips to test
-    ip_addresses = parser.get_ips(1)
+    ip_addresses = parser.get_ips(12975)
     #ip_addresses = ["play.neocubest.com","play.vulengate.com","google.com"] #two known and one unknown to demonstrate functionality
 
     #prints ip addresses with open minecraft ports

@@ -2,6 +2,7 @@
 import socket
 import sys
 import threading
+from datetime import datetime
 class portScan:
     def __init__(self,ip_addresses):
         self.ip_addresses = ip_addresses
@@ -35,6 +36,8 @@ class portScan:
     """trial-method to see if using threads would make the broader scan more
     efficient. I used chat-gpt3.5 to aid in my understanding of python-threading."""
     def thread_scan(self):
+        self.print_start_time()
+        print("-" * 50)
         threads = []
         for ip_address in self.ip_addresses:
             t = threading.Thread(target=self._thread_scan_logic, args=(ip_address,))
@@ -70,5 +73,7 @@ class portScan:
         except socket.error:
             print("server not responding")
             sys.exit()
+    def print_start_time(self):
+        print(f"scanning started at: {datetime.now()}")
 
 
