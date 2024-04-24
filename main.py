@@ -1,5 +1,7 @@
 import sys
 import socket
+import threading
+
 import pyfiglet
 import IPParser
 import portScan
@@ -24,15 +26,29 @@ def main():
     parser.parse("US")
 
     #gets a list of ips to test
-    ip_addresses = parser.get_ips(12975)
+    ip_addresses = parser.get_ips(13000)
+    ip_addresses_1 = parser.get_ips(13001)
+    ip_addresses_2 = parser.get_ips(13002)
     #ip_addresses = ["play.neocubest.com","play.vulengate.com","google.com"] #two known and one unknown to demonstrate functionality
 
     #prints ip addresses with open minecraft ports
     ip_scan = portScan.portScan(ip_addresses)
     ip_scan.thread_scan()
 
+    """ attempt at multi-threading to further increase efficiency (STILL WORKING): """
 
-
+    # ip_scan_0 = portScan.portScan(ip_addresses)
+    # ip_scan_1 = portScan.portScan(ip_addresses_1)
+    # ip_scan_2 = portScan.portScan(ip_addresses_2)
+    #
+    # ip_scans = [ip_scan_0, ip_scan_1, ip_scan_2]
+    # threads = []
+    # for ip_scan in ip_scans:
+    #     t = threading.Thread(target=ip_scan.thread_scan())
+    #     threads.append(t)
+    #     t.start()
+    # for t in threads:
+    #     t.join()
 
 
 
